@@ -1,6 +1,8 @@
 import { BrowserRouter } from 'react-router-dom';
 import { Routes, Route, NavLink, Navigate } from 'react-router-dom';
 
+import { LazyPage1, LazyPage3, LazyPage2 } from '../01-lazyLoad/pages';
+
 import logo from '../logo.svg'
 
 export const Navigation = () => {
@@ -11,24 +13,21 @@ export const Navigation = () => {
                     <img src={ logo } alt="React Logo" />
                     <ul>
                         <li>
-                            <NavLink to="/home" className={ ({ isActive }) => isActive ? 'nav-active' : '' }>Home</NavLink>
+                            <NavLink to="/LazyActive1" className={ ({ isActive }) => isActive ? 'nav-active' : '' }>LazyActive1</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/about" className={ ({ isActive }) => isActive ? 'nav-active' : '' }>About</NavLink>
+                            <NavLink to="/LazyActive2" className={ ({ isActive }) => isActive ? 'nav-active' : '' }>LazyActive2</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/users" className={ ({ isActive }) => isActive ? 'nav-active' : '' }>Users</NavLink>
+                            <NavLink to="/LazyActive3" className={ ({ isActive }) => isActive ? 'nav-active' : '' }>LazyActive3</NavLink>
                         </li>
                     </ul>
                 </nav>
-
-
                 <Routes>
-                    <Route path="about" element={ <h1>About Page</h1> } />
-                    <Route path="users" element={ <h1>Users Page</h1> } />
-                    <Route path="home" element={ <h1>Home Page</h1> } />
-                    
-                    <Route path="/*" element={ <Navigate to="/home" replace /> } />
+                    <Route path="LazyActive1" element={ <LazyPage1 /> } />
+                    <Route path="LazyActive2" element={ <LazyPage2/> } />
+                    <Route path="LazyActive3" element={ <LazyPage3 /> } />
+                    <Route path="/*" element={ <Navigate to="/lazyActive1" replace/>  } />
                 </Routes>
 
             </div>
