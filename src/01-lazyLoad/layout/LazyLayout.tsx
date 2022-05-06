@@ -7,7 +7,6 @@ const LazyLayout = () => {
       <h1>Lazy Layout page</h1>
 
       <ul>
-        {' '}
         {routesNested.map((route) => {
           return (
             <li key={route.to}>
