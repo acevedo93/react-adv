@@ -1,16 +1,26 @@
 import styles from '../styles/styles.module.css';
 import { useProduct } from '../hooks/useProduct';
-import { createContext } from 'react';
-import { ProductContextProps, Props } from '../interfaces/interfaces';
-import { ProductTitle } from './ProductTitle';
-import { ProductImage } from './ProductImage';
-import { ProductButtons } from './ProductButtons';
+import { CSSProperties, createContext, ReactNode, ReactElement } from 'react';
+import { ProductContextProps } from '../interfaces/interfaces';
+import { Product } from '../interfaces/interfaces';
+
+export interface Props {
+  product: Product;
+  children: ReactNode | ReactElement;
+  className: string;
+  style?: CSSProperties;
+}
 
 export const ProductContext = createContext({} as ProductContextProps);
 
 export const { Provider } = ProductContext;
 
-const ProductCardHOC = ({ product, children }: Props) => {
+export const ProductCardHOC = ({
+  product,
+  children,
+  className,
+  style,
+}: Props) => {
   const { counter, increaseBy } = useProduct();
   return (
     <Provider
@@ -20,13 +30,9 @@ const ProductCardHOC = ({ product, children }: Props) => {
         product,
       }}
     >
-      <div className={styles.productCard}>{children}</div>
+      <div style={style} className={`${styles.productCard} ${className}`}>
+        {children}
+      </div>
     </Provider>
   );
 };
-
-export const ProductCard = Object.assign(ProductCardHOC, {
-  Title: ProductTitle,
-  Image: ProductImage,
-  Buttons: ProductButtons,
-});
